@@ -9,24 +9,44 @@ driver.get("https://www.desmos.com/scientific#:~:text=A%20beautiful,%20free%20on
 def input_expression(expression):
     for char in expression:
         if char.isdigit():
-            button = driver.find_element(By.XPATH, f"//span[@aria-label='{char}']")
+            driver.find_element(By.XPATH, f"//span[@aria-label='{char}']").click()
         elif char == '+':
-            button = driver.find_element(By.XPATH, "//span[@aria-label='Plus']")
+            driver.find_element(By.XPATH, "//span[@aria-label='Plus']").click()
         elif char == '-':
-            button = driver.find_element(By.XPATH, "//span[@aria-label='Minus']")
+            driver.find_element(By.XPATH, "//span[@aria-label='Minus']").click()
         elif char == '*':
-            button = driver.find_element(By.XPATH, "//span[@aria-label='Times']")
+            driver.find_element(By.XPATH, "//span[@aria-label='Times']").click()
         elif char == '/':
-            button = driver.find_element(By.XPATH, "//span[@aria-label='Divide']")
+            driver.find_element(By.XPATH, "//span[@aria-label='Divide']").click()
         elif char == '=':
-            button = driver.find_element(By.XPATH, "//span[@aria-label='Enter']")
+            driver.find_element(By.XPATH, "//span[@aria-label='Enter']").click()
         elif char == '^':
-            button = driver.find_element(By.XPATH, "//span[@aria-label='Superscript']")
-        button.click()
-        time.sleep(0.5)
-
-    # equals_button = driver.find_element(By.XPATH, "//span[@aria-label='Enter']")
-    # equals_button.click()
+            driver.find_element(By.XPATH, "//span[@aria-label='Superscript']").click()
+        elif char == '.':
+            driver.find_element(By.XPATH, "//span[@aria-label='Decimal']").click()
+        elif char == 's':
+            driver.find_element(By.XPATH, "//span[@aria-label='Sine']").click()
+        elif char == 'c':
+            driver.find_element(By.XPATH, "//span[@aria-label='Cosine']").click()
+        elif char == 't':
+            driver.find_element(By.XPATH, "//span[@aria-label='Tangent']").click()
+        elif char == 'l':
+            driver.find_element(By.XPATH, "//div[@aria-label='Functions']").click()
+            driver.find_element(By.XPATH, "//span[@aria-label='Log']").click()
+            driver.find_element(By.XPATH, "//div[@aria-label='main']").click()
+        elif char == 'n':
+            driver.find_element(By.XPATH, "//div[@aria-label='Functions']").click()
+            driver.find_element(By.XPATH, "//span[@aria-label='Natural Log']").click()
+            driver.find_element(By.XPATH, "//div[@aria-label='main']").click()
+        elif char == 'r':
+            driver.find_element(By.XPATH, "//span[@aria-label='Square Root']").click()
+        elif char == 'p':
+            driver.find_element(By.XPATH, "//span[@aria-label='Pi']").click()
+        
+        time.sleep(0.1)
+        
+    equals_button = driver.find_element(By.XPATH, "//span[@aria-label='Enter']")
+    equals_button.click()
 
     time.sleep(0.5)
     btn = driver.find_element(By.XPATH, '//*[@id="main"]/div/div/div/div[2]/div[1]/div/div[7]')
@@ -87,8 +107,72 @@ def gorilla():
     for i in range(100):
         driver.find_element(By.XPATH,"//span[@aria-label='1']").click()
 
-equivalent_partitioning()
-monkey()
-gorilla()
+# Test case for Boundary Value Testing
+def boundary_value_testing():
+    print("Boundary Value Testing")
 
+    # Boundary value for large numbers
+    input_expression("999999999+1=")  # Nilai batas besar
+    input_expression("1000000000-1=")  # Nilai batas tepat di bawah batas besar
 
+    # Boundary value for small numbers
+    input_expression("0.0000001+1=")  # Nilai batas kecil
+    input_expression("0.00000001-0.0000001=")  # Nilai batas tepat di atas batas kecil
+
+    # Boundary value for negative numbers
+    input_expression("-999999999-1=")  # Nilai negatif besar
+    input_expression("-1000000000+1=")  # Nilai negatif tepat di bawah batas besar
+
+def breadth_testing():
+    print("Breadth Testing")
+
+    # Trigonometric functions
+    input_expression("s30=")  # Sine
+    input_expression("c60=")  # Cosine
+    input_expression("t45=")  # Tangent
+
+    # Logarithmic and Exponential functions
+    input_expression("l100=")  # Logaritma basis 10
+    input_expression("n2=")  # Logaritma natural
+    input_expression("2^10=")  # Eksponensial
+
+    # # Square root and Pi
+    input_expression("r16=")  # Akar kuadrat
+    input_expression("p*2=")  # Pi kali dua
+
+def depth_testing():
+    print("Depth Testing")
+
+    # Test for trigonometric functions with various angles
+    angles = [0, 30, 45, 60, 90, 180, 270, 360]
+    for angle in angles:
+        input_expression(f"s{angle}=")
+        input_expression(f"c{angle}=")
+        input_expression(f"t{angle}=")
+
+    # Test logarithmic functions with various bases
+    bases = [10, 2, 1000000]
+    values = [1, 10, 100, 1000]
+    for base in bases:
+        for value in values:
+            input_expression(f"l{value}=")  # Log base 10
+            input_expression(f"n{value}=")   # Natural log
+
+    # Test exponential functions with various bases
+    bases = [2, 10, 3]
+    exponents = [0, 1, 2, 3, 10, -1]
+    for base in bases:
+        for exponent in exponents:
+            input_expression(f"{base}^{exponent}=")
+
+    # Test for large numbers and boundary values
+    input_expression("1000000 + 1=")  # Very large number addition
+    input_expression("999999999/3=")  # Large number division
+    input_expression("0.0000001 * 10000000=")  # Small number multiplication
+
+# equivalent_partitioning()
+# monkey()
+# gorilla()
+# boundary_value_testing()
+# breadth_testing()
+depth_testing()
