@@ -53,43 +53,35 @@ def input_expression(expression):
     btn.click()
     time.sleep(0.5)
 
-# Test case for units (satuan) operations
 def test_units_operations():
     print("Testing unit operations")
     input_expression("1+1="),
     input_expression("8-7="),
 
-# Test case for tens (puluhan)
 def test_tens_operations():
     print("Testing tens operations")
     input_expression("16+89="),
     input_expression("27*5="),
 
-# Test case for hundreds (ratusan)
 def test_hundreds_operations():
     print("Testing hundreds operations")
     input_expression("125+478="),
     input_expression("200-150="),
 
-# Test case for thousands (ribuan)
 def test_thousands_operations():
     print("Testing thousands operations")
     input_expression("1250+4750="),
     input_expression("7000-2000="),
 
-# Test case for ten thousands (puluh ribuan)
 def test_ten_thousands_operations():
     print("Testing ten thousands operations")
     input_expression("12345+67890="),
     input_expression("50000-20000="),
 
-# Test case for hundred thousands (ratus ribuan)
 def test_hundred_thousands_operations():
     print("Testing hundred thousands operations")
     input_expression("123456+654321="),
     input_expression("700000-300000="),
-
-
 
 def equivalent_partitioning():
     test_units_operations()
@@ -107,68 +99,66 @@ def gorilla():
     for i in range(100):
         driver.find_element(By.XPATH,"//span[@aria-label='1']").click()
 
-# Test case for Boundary Value Testing
 def boundary_value_testing():
     print("Boundary Value Testing")
 
-    # Boundary value for large numbers
-    input_expression("999999999+1=")  # Nilai batas besar
-    input_expression("1000000000-1=")  # Nilai batas tepat di bawah batas besar
+    input_expression("999999999+1=") 
+    input_expression("1000000000-1=")  
 
-    # Boundary value for small numbers
-    input_expression("0.0000001+1=")  # Nilai batas kecil
-    input_expression("0.00000001-0.0000001=")  # Nilai batas tepat di atas batas kecil
+    input_expression("0.0000001+1=")  
+    input_expression("0.00000001-0.0000001=")  
 
-    # Boundary value for negative numbers
-    input_expression("-999999999-1=")  # Nilai negatif besar
-    input_expression("-1000000000+1=")  # Nilai negatif tepat di bawah batas besar
+    input_expression("-999999999-1=") 
+    input_expression("-1000000000+1=") 
 
 def breadth_testing():
     print("Breadth Testing")
 
-    # Trigonometric functions
-    input_expression("s30=")  # Sine
-    input_expression("c60=")  # Cosine
-    input_expression("t45=")  # Tangent
+    input_expression("s30=") 
+    input_expression("c60=") 
+    input_expression("t45=") 
 
-    # Logarithmic and Exponential functions
-    input_expression("l100=")  # Logaritma basis 10
-    input_expression("n2=")  # Logaritma natural
-    input_expression("2^10=")  # Eksponensial
+    input_expression("l100=") 
+    input_expression("n2=")  
+    input_expression("2^10=") 
 
-    # # Square root and Pi
-    input_expression("r16=")  # Akar kuadrat
-    input_expression("p*2=")  # Pi kali dua
+    input_expression("r16=")  
+    input_expression("p*2=")  
 
 def depth_testing():
     print("Depth Testing")
 
-    # Test for trigonometric functions with various angles
     angles = [0, 30, 45, 60, 90, 180, 270, 360]
     for angle in angles:
         input_expression(f"s{angle}=")
         input_expression(f"c{angle}=")
         input_expression(f"t{angle}=")
 
-    # Test logarithmic functions with various bases
-    bases = [10, 2, 1000000]
     values = [1, 10, 100, 1000]
-    for base in bases:
-        for value in values:
-            input_expression(f"l{value}=")  # Log base 10
-            input_expression(f"n{value}=")   # Natural log
+    for value in values:
+        input_expression(f"l{value}=") 
+        input_expression(f"n{value}=")   
 
-    # Test exponential functions with various bases
     bases = [2, 10, 3]
     exponents = [0, 1, 2, 3, 10, -1]
     for base in bases:
         for exponent in exponents:
             input_expression(f"{base}^{exponent}=")
 
-    # Test for large numbers and boundary values
-    input_expression("1000000 + 1=")  # Very large number addition
-    input_expression("999999999/3=")  # Large number division
-    input_expression("0.0000001 * 10000000=")  # Small number multiplication
+    input_expression("1000000 + 1=")  
+    input_expression("999999999/3=")  
+    input_expression("0.0000001 * 10000000=")  
+
+def allpairs():
+    input_expression("1+100=")
+    input_expression("2-200=")
+    input_expression("3*300=")
+    input_expression("4/400=")
+    input_expression("5+500=")
+    input_expression("6-600=")
+    input_expression("7*700=")
+    input_expression("8/800=")
+    input_expression("9+900=")
 
 # equivalent_partitioning()
 # monkey()
@@ -176,3 +166,5 @@ def depth_testing():
 # boundary_value_testing()
 # breadth_testing()
 depth_testing()
+# allpairs()
+
