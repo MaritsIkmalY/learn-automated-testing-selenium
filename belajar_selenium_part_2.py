@@ -1,6 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import time
+import random
 
 driver = webdriver.Edge()
 
@@ -42,6 +43,10 @@ def input_expression(expression):
             driver.find_element(By.XPATH, "//span[@aria-label='Square Root']").click()
         elif char == 'p':
             driver.find_element(By.XPATH, "//span[@aria-label='Pi']").click()
+        elif char == '(':
+            driver.find_element(By.XPATH, "//span[@aria-label='Left Parenthesis']").click()
+        elif char == ')':
+            driver.find_element(By.XPATH, "//span[@aria-label='Right Parenthesis']").click()
         
         time.sleep(0.1)
         
@@ -83,6 +88,12 @@ def test_hundred_thousands_operations():
     input_expression("123456+654321="),
     input_expression("700000-300000="),
 
+def sanity_testing():
+    input_expression("1+2=")
+    input_expression("1-2=")
+    input_expression("1*2=")
+    input_expression("1/2=")
+
 def equivalent_partitioning():
     test_units_operations()
     test_tens_operations()
@@ -92,12 +103,41 @@ def equivalent_partitioning():
     test_hundred_thousands_operations()
 
 def monkey():
-    input_expression("1--=")
-    input_expression("1/0=")
+    invalid_test_cases = [
+        "1--=",     
+        "1/0=",     
+        "++++=",    
+        "*/2=",     
+        "2**2=",    
+        "(2+2))=",  
+        "((2+2)=",  
+        "2+/2=",    
+        "0/0=",     
+        "(1+2)*=",  
+        "1.2.3+2=", 
+        "1^^2=",    
+        "2/=",      
+        "l(0)=",  
+        "s(90)+=",
+        "r(-1)=",
+        "999999999999999999+1=", 
+        "2//2=",    
+        "pp+2=",    
+    ]
+    
+    for case in invalid_test_cases:
+        print(f"Testing expression: {case}")
+        input_expression(case)
 
 def gorilla():
     for i in range(100):
         driver.find_element(By.XPATH,"//span[@aria-label='1']").click()
+    
+    random_numbers = [random.randint(1, 99) for _ in range(50)]
+    
+    expression = "*".join(map(str, random_numbers)) + "="
+    
+    input_expression(expression)
 
 def boundary_value_testing():
     print("Boundary Value Testing")
@@ -123,7 +163,7 @@ def breadth_testing():
     input_expression("2^10=") 
 
     input_expression("r16=")  
-    input_expression("p*2=")  
+    input_expression("p*2=")
 
 def depth_testing():
     print("Depth Testing")
@@ -145,26 +185,26 @@ def depth_testing():
         for exponent in exponents:
             input_expression(f"{base}^{exponent}=")
 
-    input_expression("1000000 + 1=")  
-    input_expression("999999999/3=")  
-    input_expression("0.0000001 * 10000000=")  
+    input_expression("(1000000 + 1) * (t(p) + r9)=")  
 
 def allpairs():
-    input_expression("1+100=")
-    input_expression("2-200=")
-    input_expression("3*300=")
-    input_expression("4/400=")
-    input_expression("5+500=")
-    input_expression("6-600=")
-    input_expression("7*700=")
-    input_expression("8/800=")
-    input_expression("9+900=")
+    test_cases = [
+        "1+10=", "1-20=", "1*30=", "1/40=",
+        "2+50=", "2-60=", "2*70=", "2/80=",
+        "3+90=", "3-100=", "3*200=", "3/300=",
+        "4+400=", "4-500=", "4*600=", "4/700=",
+        "5+800=", "5-900=", "5*1000=", "5/1100="
+    ]
+    
+    for case in test_cases:
+        input_expression(case)
 
+# sanity_testing()
 # equivalent_partitioning()
-# monkey()
-# gorilla()
 # boundary_value_testing()
 # breadth_testing()
-depth_testing()
+# depth_testing()
 # allpairs()
+# monkey()
+# gorilla()
 
