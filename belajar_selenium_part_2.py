@@ -174,27 +174,15 @@ def depth_testing():
         input_expression(f"c{angle}=")
         input_expression(f"t{angle}=")
 
-    values = [1, 10, 100, 1000]
-    for value in values:
-        input_expression(f"l{value}=") 
-        input_expression(f"n{value}=")   
-
-    bases = [2, 10, 3]
-    exponents = [0, 1, 2, 3, 10, -1]
-    for base in bases:
-        for exponent in exponents:
-            input_expression(f"{base}^{exponent}=")
-
-    input_expression("(1000000 + 1) * (t(p) + r9)=")  
+    input_expression("(1000000 + 1) * (t(p) + r9) - l(1000) / n(2)=")    
 
 def allpairs():
     test_cases = [
-        "1+10=", "1-20=", "1*30=", "1/40=",
-        "2+50=", "2-60=", "2*70=", "2/80=",
-        "3+90=", "3-100=", "3*200=", "3/300=",
-        "4+400=", "4-500=", "4*600=", "4/700=",
-        "5+800=", "5-900=", "5*1000=", "5/1100="
-    ]
+    "1+10=", "2-15=", "3*20=", "4/30=", "5+40=", "6-50=", "7*60=", "8/70=", "9+80=",
+    "1-99=", "2*25=", "3/35=", "4+45=", "5-55=", "6*65=", "7/75=", "8+85=", "9-95=",
+    "1*12=", "2/22="
+]
+
     
     for case in test_cases:
         input_expression(case)
@@ -204,7 +192,6 @@ def allpairs():
 # boundary_value_testing()
 # breadth_testing()
 # depth_testing()
-# allpairs()
+allpairs()
 # monkey()
 # gorilla()
-
