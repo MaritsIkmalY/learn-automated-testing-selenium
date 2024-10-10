@@ -61,32 +61,32 @@ def input_expression(expression):
 def test_units_operations():
     print("Testing unit operations")
     input_expression("1+1="),
-    input_expression("8-7="),
+    input_expression("-1--8="),
 
 def test_tens_operations():
     print("Testing tens operations")
     input_expression("16+89="),
-    input_expression("27*5="),
+    input_expression("-27*-55="),
 
 def test_hundreds_operations():
     print("Testing hundreds operations")
     input_expression("125+478="),
-    input_expression("200-150="),
+    input_expression("-200+-150="),
 
 def test_thousands_operations():
     print("Testing thousands operations")
     input_expression("1250+4750="),
-    input_expression("7000-2000="),
+    input_expression("-7000--2000="),
 
 def test_ten_thousands_operations():
     print("Testing ten thousands operations")
     input_expression("12345+67890="),
-    input_expression("50000-20000="),
+    input_expression("-50000+-20000="),
 
 def test_hundred_thousands_operations():
     print("Testing hundred thousands operations")
     input_expression("123456+654321="),
-    input_expression("700000-300000="),
+    input_expression("-700000+-300000="),
 
 def sanity_testing():
     input_expression("1+2=")
@@ -164,7 +164,11 @@ def breadth_testing():
 
     input_expression("r16=")  
     input_expression("p*2=")
-
+    input_expression("1+1=")
+    input_expression("2-5=")
+    input_expression("3*10=")
+    input_expression("4/16=")
+    
 def depth_testing():
     print("Depth Testing")
 
