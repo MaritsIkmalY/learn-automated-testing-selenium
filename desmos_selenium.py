@@ -69,11 +69,10 @@ def input_expression(expression):
             element = driver.find_element(By.XPATH, "//span[@aria-hidden='true']")
             driver.execute_script("arguments[0].click();", element)
             
-        time.sleep(1)
+        time.sleep(0.1)
     
-        
-    # equals_button = driver.find_element(By.XPATH, "//span[@aria-label='Enter']")
-    # equals_button.click()
+    equals_button = driver.find_element(By.XPATH, "//span[@aria-label='Enter']")
+    equals_button.click()
 
     time.sleep(0.75)
     btn = driver.find_element(By.XPATH, '//*[@id="main"]/div/div/div/div[2]/div[1]/div/div[7]')
