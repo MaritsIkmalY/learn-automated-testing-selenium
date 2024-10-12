@@ -9,16 +9,29 @@ driver = webdriver.Edge()
 driver.get("https://www.desmos.com/scientific#:~:text=A%20beautiful,%20free%20online%20scientific%20calculator")
 
 def input_expression(expression):
+    character = 0
     for char in expression:
         if char.isdigit():
             driver.find_element(By.XPATH, f"//span[@aria-label='{char}']").click()
         elif char == '+':
+            if(character != 0):
+                driver.find_element(By.XPATH, "//span[@aria-label='Right Parenthesis']").click()
+                character -= 1
             driver.find_element(By.XPATH, "//span[@aria-label='Plus']").click()
         elif char == '-':
+            if(character != 0):
+                driver.find_element(By.XPATH, "//span[@aria-label='Right Parenthesis']").click()
+                character -= 1
             driver.find_element(By.XPATH, "//span[@aria-label='Minus']").click()
         elif char == '*':
+            if(character != 0):
+                driver.find_element(By.XPATH, "//span[@aria-label='Right Parenthesis']").click()
+                character -= 1
             driver.find_element(By.XPATH, "//span[@aria-label='Times']").click()
         elif char == '/':
+            if(character != 0):
+                driver.find_element(By.XPATH, "//span[@aria-label='Right Parenthesis']").click()
+                character -= 1
             driver.find_element(By.XPATH, "//span[@aria-label='Divide']").click()
         elif char == '=':
             driver.find_element(By.XPATH, "//span[@aria-label='Enter']").click()
@@ -27,16 +40,21 @@ def input_expression(expression):
         elif char == '.':
             driver.find_element(By.XPATH, "//span[@aria-label='Decimal']").click()
         elif char == 's':
+            character +=1
             driver.find_element(By.XPATH, "//span[@aria-label='Sine']").click()
         elif char == 'c':
+            character +=1
             driver.find_element(By.XPATH, "//span[@aria-label='Cosine']").click()
         elif char == 't':
+            character +=1
             driver.find_element(By.XPATH, "//span[@aria-label='Tangent']").click()
         elif char == 'l':
+            character +=1
             driver.find_element(By.XPATH, "//div[@aria-label='Functions']").click()
             driver.find_element(By.XPATH, "//span[@aria-label='Log']").click()
             driver.find_element(By.XPATH, "//div[@aria-label='main']").click()
         elif char == 'n':
+            character +=1
             driver.find_element(By.XPATH, "//div[@aria-label='Functions']").click()
             driver.find_element(By.XPATH, "//span[@aria-label='Natural Log']").click()
             driver.find_element(By.XPATH, "//div[@aria-label='main']").click()
@@ -51,9 +69,7 @@ def input_expression(expression):
             element = driver.find_element(By.XPATH, "//span[@aria-hidden='true']")
             driver.execute_script("arguments[0].click();", element)
             
-            
-        
-        time.sleep(0.1)
+        time.sleep(1)
     
         
     # equals_button = driver.find_element(By.XPATH, "//span[@aria-label='Enter']")
@@ -77,7 +93,7 @@ def test_thousands_operations():
 
 def sanity_testing():
     sanity_values = [
-        "1+2=", "1-2=", "1*2=", "1/2=", "r(81)="
+        "1+2=", "1-2=", "1*2=", "1/2=", "r81="
     ]
     
     for value in sanity_values:
@@ -135,7 +151,7 @@ def breadth_testing():
         input_expression(value)
     
 def depth_testing():
-    input_expression("((1000000 + 1) * l1000) - tp) + s30) - c60)) / n2 + r9^1.5 =")    
+    input_expression("((1000000 + 1) * l1000) - (tp + s30 - c60))/ (n2 + r9^1.5)=")    
 
 def allpairs():
     test_cases = [
@@ -150,7 +166,7 @@ def allpairs():
 #integration testing
 # sanity_testing()
 # boundary_value_testing()
-# breadth_testing()
+breadth_testing()
 # equivalent_partitioning()
 
 # depth_testing()
