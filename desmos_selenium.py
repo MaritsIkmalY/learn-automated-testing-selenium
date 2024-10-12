@@ -52,41 +52,39 @@ def input_expression(expression):
         
     equals_button = driver.find_element(By.XPATH, "//span[@aria-label='Enter']")
     equals_button.click()
+    # result_digits = driver.find_elements(By.CSS_SELECTOR, ".dcg-basic-expression-value .dcg-mq-digit")
 
+    # result = ''.join([digit.text for digit in result_digits])
+    # print(result)
     time.sleep(0.5)
     btn = driver.find_element(By.XPATH, '//*[@id="main"]/div/div/div/div[2]/div[1]/div/div[7]')
     btn.click()
     time.sleep(0.5)
+    # return result
 
 def test_units_operations():
-    print("Testing unit operations")
-    input_expression("1+1="),
-    input_expression("-1--8="),
+    input_expression("(1+1)+r(1)*9/3^1=")
+    # assert "2" in result
 
 def test_tens_operations():
-    print("Testing tens operations")
-    input_expression("16+89="),
-    input_expression("-27*-55="),
+    input_expression("16+89+t45/s45*r81=")
+    # assert "107" in result
 
 def test_hundreds_operations():
-    print("Testing hundreds operations")
-    input_expression("125+478="),
-    input_expression("-200+-150="),
+    input_expression("125+478*r215*l100=")
+    # assert "10037" in result
 
 def test_thousands_operations():
-    print("Testing thousands operations")
-    input_expression("1250+4750="),
-    input_expression("-7000--2000="),
+    input_expression("1234 + 5678 * s9000 - c4750 + l3000=")
+    # assert "1205" in result
 
 def test_ten_thousands_operations():
-    print("Testing ten thousands operations")
-    input_expression("12345+67890="),
-    input_expression("-50000+-20000="),
+    input_expression("12500 + 47500 * s30000 - c20000 + l50000=")
+    # assert "53254" in result
 
 def test_hundred_thousands_operations():
-    print("Testing hundred thousands operations")
-    input_expression("123456+654321="),
-    input_expression("-700000+-300000="),
+    input_expression("s123456 + c654321 * r40000 + l100000=")
+    # assert "0.41" in result
 
 def sanity_testing():
     input_expression("1+2=")
@@ -140,34 +138,18 @@ def gorilla():
     input_expression(expression)
 
 def boundary_value_testing():
-    print("Boundary Value Testing")
-
-    input_expression("999999999+1=") 
-    input_expression("1000000000-1=")  
-
-    input_expression("0.0000001+1=")  
-    input_expression("0.00000001-0.0000001=")  
-
-    input_expression("-999999999-1=") 
-    input_expression("-1000000000+1=") 
+    input_expression("9999999999999999999 - -9999999999999999999*9999999999999999999=") 
 
 def breadth_testing():
-    print("Breadth Testing")
+    input_expression("s30+c30=") 
+    input_expression("c60+60=") 
+    input_expression("t45+l100=") 
 
-    input_expression("s30=") 
-    input_expression("c60=") 
-    input_expression("t45=") 
+    input_expression("l100*2^5=") 
+    input_expression("2^10+(2*3)=") 
 
-    input_expression("l100=") 
-    input_expression("n2=")  
-    input_expression("2^10=") 
-
-    input_expression("r16=")  
-    input_expression("p*2=")
-    input_expression("1+1=")
-    input_expression("2-5=")
-    input_expression("3*10=")
-    input_expression("4/16=")
+    input_expression("r16*r25=")  
+    input_expression("p*2+8=")
     
 def depth_testing():
     print("Depth Testing")
@@ -185,17 +167,19 @@ def allpairs():
     "1+10=", "2-15=", "3*20=", "4/30=", "5+40=", "6-50=", "7*60=", "8/70=", "9+80=",
     "1-99=", "2*25=", "3/35=", "4+45=", "5-55=", "6*65=", "7/75=", "8+85=", "9-95=",
     "1*12=", "2/22="
-]
+    ]
 
     
     for case in test_cases:
         input_expression(case)
 
+#integration testing
 # sanity_testing()
-# equivalent_partitioning()
 # boundary_value_testing()
 # breadth_testing()
+equivalent_partitioning()
+
 # depth_testing()
-allpairs()
+# allpairs()
 # monkey()
 # gorilla()
