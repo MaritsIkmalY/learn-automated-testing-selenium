@@ -1,5 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 import time
 import random
 
@@ -47,7 +48,9 @@ def input_expression(expression):
             driver.find_element(By.XPATH, "//span[@aria-label='Left Parenthesis']").click()
         elif char == ')':
             driver.find_element(By.XPATH, "//span[@aria-label='Right Parenthesis']").click()
-            driver.find_element(By.XPATH, "//span[@aria-hidden='true']").click()
+            element = driver.find_element(By.XPATH, "//span[@aria-hidden='true']")
+            driver.execute_script("arguments[0].click();", element)
+            
             
         
         time.sleep(0.1)
@@ -114,12 +117,9 @@ def monkey():
         input_expression(case)
 
 def gorilla():
-    for i in range(100):
-        driver.find_element(By.XPATH,"//span[@aria-label='1']").click()
+    loop_numbers = [5 for _ in range(50)]
     
-    random_numbers = [random.randint(1, 99) for _ in range(50)]
-    
-    expression = "*".join(map(str, random_numbers)) + "="
+    expression = "*".join(map(str, loop_numbers)) + "="
     
     input_expression(expression)
 
@@ -135,15 +135,7 @@ def breadth_testing():
         input_expression(value)
     
 def depth_testing():
-    print("Depth Testing")
-
-    angles = [0, 30, 45, 60, 90, 180, 270, 360]
-    for angle in angles:
-        input_expression(f"s{angle}=")
-        input_expression(f"c{angle}=")
-        input_expression(f"t{angle}=")
-
-    input_expression("(1000000 + 1) * (t(p) + r9) - l(1000) / n(2)=")    
+    input_expression("((1000000 + 1) * l1000) - tp) + s30) - c60)) / n2 + r9^1.5 =")    
 
 def allpairs():
     test_cases = [
@@ -151,7 +143,6 @@ def allpairs():
     "1-99=", "2*25=", "3/35=", "4+45=", "5-55=", "6*65=", "7/75=", "8+85=", "9-95=",
     "1*12=", "2/22="
     ]
-
     
     for case in test_cases:
         input_expression(case)
@@ -166,10 +157,3 @@ def allpairs():
 # allpairs()
 # monkey()
 # gorilla()
-
-
-def test():
-    # input_expression("l(100)+1=")
-    input_expression("(t(45) + r(9))=")
-    
-test()
