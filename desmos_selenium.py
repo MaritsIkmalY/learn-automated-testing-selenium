@@ -75,8 +75,8 @@ def input_expression(expression):
     equals_button.click()
 
     time.sleep(0.75)
-    btn = driver.find_element(By.XPATH, '//*[@id="main"]/div/div/div/div[2]/div[1]/div/div[7]')
-    btn.click()
+    clear = driver.find_element(By.XPATH, '//div[@aria-label="clear all"]')
+    clear.click()
 
 def test_units_operations():
     input_expression("1+9=")
@@ -142,12 +142,28 @@ def boundary_value_testing():
     input_expression("9999999999999999999 - -9999999999999999999*9999999999999999999=") 
 
 def breadth_testing():
-    breadth_values = [
-        "s30+c30=", "c60+60=", "t45+l100=", "l100*2^5=", "2^10+(2*3)=", "r16*r25=", "p*2+8=",
-    ]
-    
-    for value in breadth_values:
-        input_expression(value)
+    input_expression("5+8=")
+    time.sleep(1)
+    driver.find_element(By.XPATH, '//i[@class="dcg-icon-caret-down"]').click()
+    driver.find_element(By.XPATH, '//a[@href="/calculator"]').click()
+    driver.find_element(By.XPATH, '//textarea[@class="dcg-focus-visible"]').send_keys("y=5x+8")
+    time.sleep(1)
+    driver.back()
+    driver.find_element(By.XPATH, '//a[@href="/fourfunction"]').click()
+    input_expression("5+8=")
+    time.sleep(1)
+    driver.find_element(By.XPATH, '//i[@class="dcg-icon-caret-down"]').click()
+    driver.find_element(By.XPATH, '//a[@href="/matrix"]').click()
+    input_expression("5+8=")
+    time.sleep(1)
+    driver.find_element(By.XPATH, '//i[@class="dcg-icon-caret-down"]').click()
+    driver.find_element(By.XPATH, '//a[@href="/geometry"]').click()
+    driver.find_element(By.XPATH, '//textarea[@class="dcg-focus-visible"]').send_keys("y=5x+8")
+    time.sleep(1)
+    driver.back()
+    driver.find_element(By.XPATH, '//a[@href="/3d"]').click()
+    driver.find_element(By.XPATH, '//textarea[@class="dcg-focus-visible"]').send_keys("y=5x+8")
+    time.sleep(1)
     
 def depth_testing():
     input_expression("((1000000 + 1) * l1000) - (tp + s30 - c60))/ (n2 + r9^1.5)=")    
@@ -165,10 +181,10 @@ def allpairs():
 #integration testing
 # sanity_testing()
 # boundary_value_testing()
-breadth_testing()
 # equivalent_partitioning()
-
 # depth_testing()
+
 # allpairs()
+# breadth_testing()
 # monkey()
 # gorilla()
