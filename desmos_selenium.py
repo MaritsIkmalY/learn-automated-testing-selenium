@@ -139,7 +139,9 @@ def gorilla():
     input_expression(expression)
 
 def boundary_value_testing():
-    input_expression("9999999999999999999 - -9999999999999999999*9999999999999999999=") 
+    input_expression("9999999999 + 0=") 
+    input_expression("9999999999 + 1=")
+    input_expression("-9999999999 * -1=")
 
 def breadth_testing():
     input_expression("5+8=")
@@ -154,7 +156,29 @@ def breadth_testing():
     time.sleep(1)
     driver.find_element(By.XPATH, '//i[@class="dcg-icon-caret-down"]').click()
     driver.find_element(By.XPATH, '//a[@href="/matrix"]').click()
-    input_expression("5+8=")
+    driver.find_element(By.XPATH, '//span[@aria-label="A"]').click()
+    driver.find_element(By.XPATH, '//div[@aria-label="New Matrix"]').click()
+    textareas = driver.find_elements(By.XPATH, "//div[@class='dcg-matrix-expression dcg-focused dcg-do-not-blur']//div[@class='dcg-matrix-view-cell']")
+    for textarea in textareas:
+        textarea.click()
+        random_number = random.randint(1, 9)  
+        driver.find_element(By.XPATH, f"//span[@aria-label='{random_number}']").click()
+
+    driver.find_element(By.XPATH, '//span[@aria-label="Enter"]').click()
+    
+    driver.find_element(By.XPATH, '//span[@aria-label="B"]').click()
+    driver.find_element(By.XPATH, '//div[@aria-label="New Matrix"]').click()
+    textareas = driver.find_elements(By.XPATH, "//div[@class='dcg-matrix-expression dcg-focused dcg-do-not-blur']//div[@class='dcg-matrix-view-cell']")
+    print(len(textareas))
+    for textarea in textareas:
+        textarea.click()
+        random_number = random.randint(1, 9)  
+        driver.find_element(By.XPATH, f"//span[@aria-label='{random_number}']").click()
+
+    driver.find_element(By.XPATH, '//span[@aria-label="Enter"]').click()
+    driver.find_element(By.XPATH, '//span[@aria-label="A"]').click()
+    driver.find_element(By.XPATH, '//span[@aria-label="B"]').click()
+    driver.find_element(By.XPATH, '//span[@aria-label="Enter"]').click()    
     time.sleep(1)
     driver.find_element(By.XPATH, '//i[@class="dcg-icon-caret-down"]').click()
     driver.find_element(By.XPATH, '//a[@href="/geometry"]').click()
@@ -185,6 +209,6 @@ def allpairs():
 # depth_testing()
 
 # allpairs()
-# breadth_testing()
+breadth_testing()
 # monkey()
 # gorilla()
